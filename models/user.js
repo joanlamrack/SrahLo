@@ -2,13 +2,14 @@
 module.exports = (sequelize, DataTypes) => {
 	var User = sequelize.define('User', {
 		username: {
-    	type:DataTypes.STRING,
+		type:DataTypes.STRING,
+		allowNull: false,
     	validate:{
-    		allowNull: false,
+    		
     		isUnique:function(value, next) {
 
 					User.find({
-						where: {email: value},
+						where: {username: value},
 						attributes: ['id']
 					})
 						.done(function(error, user) {
@@ -29,10 +30,6 @@ module.exports = (sequelize, DataTypes) => {
     		is: {
     			args:/^\w+@([a-z]+\.)+[a-z]{2,3}$/,
     			msg:"This is not email format"
-    		},
-    		allowNull:{
-    			args:false,
-    			msg:"Email field is required"
     		},
     		isUnique:function(value, next) {
 					User.find({

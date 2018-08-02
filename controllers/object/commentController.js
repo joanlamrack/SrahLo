@@ -1,6 +1,7 @@
 const Model = require("../../models");
 const Comment = Model.Comment;
 const Movie = Model.Movie;
+const User = Model.User;
 
 
 class CommentController{
@@ -19,7 +20,7 @@ class CommentController{
 
 	static delete(commentId){
 		return Comment.destroy({
-			where:{id:UserId}
+			where:{id:commentId}
 		})
 	}
 

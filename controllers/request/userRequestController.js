@@ -11,26 +11,29 @@ class UserRequestController{
 
 	static loginAuth_post(req,res){
 		UserController
-		.login(
-			req.body.username,
-			req.body.password
-		)
-		.then((user)=>{
+			.login(
+				req.body.username,
+				req.body.password
+			)
+			.then((user)=>{
 			//res.send(response);
-			if(user){
-				req.session.user = user.dataValues;
-				res.redirect("/dashboard");
-			}
-			else{
-				res.send('id atau password salah')
-			}
-		})
-		.catch((err)=>{
-			res.send(err);
-		})
+				if(user){
+					
+					req.session.user = user.dataValues;
+					console.log(req.session.user);
+					res.redirect("/dashboard");
+				}
+				else{
+					res.send("id atau password salah");
+				}
+			})
+			.catch((err)=>{
+				res.send(err);
+			});
 	}
 
 	static logoutAuth_get(req,res){
+		console.log(req.session.user);
 		req.session.user=null;
 		res.redirect("/");
 	}
@@ -40,18 +43,18 @@ class UserRequestController{
 	}
 
 	static registerAuth_post(req,res){
+		console.log(req.body.username,req.body.password);
 		UserController
-		.add(
-			req.body.username, 
-			req.body.password,
-			req.body.email
+			.add(
+				req.body.username, 
+				req.body.password
 			)
-		.then((response)=>{
-			res.send(response)
-		})
-		.catch((err)=>{
-			res.send(err)
-		})
+			.then((response)=>{
+				res.redirect("/")
+			})
+			.catch((err)=>{
+				res.send(err);
+			});
 	}
 
 

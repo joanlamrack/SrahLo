@@ -7,21 +7,20 @@ class UserController{
 
 	}
 
-	static add(username,password,email){
-		let salt = crypto.createCipher("md5").update(username).digest("hex");
+	static add(username,password){
+		let salt = crypto.createHash("md5").update(username).digest("hex");
 		let combined = password + salt;
 		let encryptedPassword = crypto.createHash("md5").update(combined).digest("hex");
-
+		console.log("ENCRYPTED",encryptedPassword);
 
 		return User.create({
 			username,
-			password:encryptedPassword,
-			email
-		})
+			password:encryptedPassword
+		});
 	}
 
 	static login(username,password){
-		let salt = crypto.createCipher("md5").update(username).digest("hex");
+		let salt = crypto.createHash("md5").update(username).digest("hex");
 		let combined = password + salt;
 		let encryptedPassword = crypto.createHash("md5").update(combined).digest("hex");
 

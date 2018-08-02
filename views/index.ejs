@@ -1,0 +1,85 @@
+<%- include("head"); -%>
+
+<div id="main">
+
+<img src="../images/frontlogo.png" alt="SrahLo"><br>
+
+<span id="flavorText">Movie Review Platform <i>slash</i> Defending The Net Freedom</span>
+
+<div id="loginregister">
+  <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+
+  <div id="id01" class="modal">
+    
+    <!-- ACTION  ADA DI SINI-->
+     <form class="modal-content animate" action="/auths/login" method="POST">
+      
+      <div class="container">
+        <label for="uname"><b>LOGIN</b></label><br>
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" required>
+          
+        <button type="submit">Login</button>
+      </div>
+
+      <div class="container">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <span class="psw"><a href="#">Have Account Already?</a></span>
+      </div>
+    </form>
+  </div>
+
+  <script>
+  // Get the modal
+  var modal = document.getElementById('id01');
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
+  </script>
+
+  <button onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Register</button>
+
+  <div id="id02" class="modal">
+    <!-- ACTION  ADA DI SINI-->
+     <form class="modal-content animate" action="/auths/register" method="POST">
+
+      <div class="container">
+        <label for="uname"><b>REGISTER</b></label><br>
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password" required>
+          
+        <button type="submit">Register</button>
+      </div>
+
+      <div class="container">
+        <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+        <span class="psw" onclick="document.getElementById('id01').style.display='block'"><a href="#">Have Account Already?</a></span>
+      </div>
+    </form>
+  </div>
+
+  <script>
+  // Get the modal
+  var modal = document.getElementById('id02');
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
+  </script>
+</div>
+</div>
+
+<%- include("bottom"); -%>
