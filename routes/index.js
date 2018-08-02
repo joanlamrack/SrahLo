@@ -7,14 +7,32 @@ routes.use("/auths", auths);
 routes.use("/dashboard/:userId/comments", comments);
 routes.use("/dashboard/:userId/movies", movies);
 
-//redirect to login if not logged in
-routes.get("/", function()req,res){
-	res.redirect("/auths/login")
+
+
+let sessionchecker = (req,res,next)=>{
+    if(req.session.user){
+        res.redirect(`/dashboard/${req.session.user.id}`)
+    }else{
+        res.redirect("/auths/login")
+    }
 }
 
-routes.get("/", function()req,res){
-	res.redirect("/dashboard/:userId")
-}
+routes.get("/", function(req,res){
+	res.redirect("/dashboard")
+})
+
+routes.get("/dashboard",sessionchecker,function(req,res){
+
+});
+
+routes.get("/dashboard/:userId", function(req,res){
+	res.send("ini dashboard");
+})
+
+
+
+
+
 
 //redirect to dashboard/:userId/ if logged in
 

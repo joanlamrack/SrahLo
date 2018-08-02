@@ -1,4 +1,4 @@
-const Model = require("../models");
+const Model = require("../../models");
 const User = Model.User;
 const crypto = require("crypto")
 
@@ -15,7 +15,7 @@ class UserController{
 
 		return User.create({
 			username,
-			password:encryptedPassword
+			password:encryptedPassword,
 			email
 		})
 	}

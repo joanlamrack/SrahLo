@@ -1,28 +1,29 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var User = sequelize.define('User', {
-    username: {
+	var User = sequelize.define('User', {
+		username: {
     	type:DataTypes.STRING,
     	validate:{
     		allowNull: false,
     		isUnique:function(value, next) {
 
-                User.find({
-                    where: {email: value},
-                    attributes: ['id']
-                })
-                    .done(function(error, user) {
-                        if (error)
-                            return next(error);
+					User.find({
+						where: {email: value},
+						attributes: ['id']
+					})
+						.done(function(error, user) {
+							if (error)
+								return next(error);
 
-                        if (user)
-                            return next('Username already in use!')
-                        next();
+							if (user)
+								return next('Username already in use!')
+							next();
 
-                    });
-    	}
-    },
-    email: {
+						});
+				}
+			}
+		},
+		email: {
     	type: DataTypes.STRING,
     	validate:{
     		is: {
@@ -34,22 +35,23 @@ module.exports = (sequelize, DataTypes) => {
     			msg:"Email field is required"
     		},
     		isUnique:function(value, next) {
-                User.find({
-                    where: {email: value},
-                    attributes: ['id']
-                })
-                    .done(function(error, user) {
-                        if (error)
-                            return next(error);
+					User.find({
+						where: {email: value},
+						attributes: ['id']
+					})
+						.done(function(error, user) {
+							if (error)
+								return next(error);
 
-                        if (user)
-                            return next('Email address already in use!')
-                        next();
+							if (user)
+								return next('Email address already in use!')
+							next();
 
-                    });
+						});
+				}
     	}
-    },
-    password: {
+		},
+		password: {
     	type:DataTypes.STRING,
     	validate:{
     		min: {
@@ -57,11 +59,11 @@ module.exports = (sequelize, DataTypes) => {
     			msg:"Password length minimum 8 characters"
     		}
     	}
-    }
-  }, {});
-  User.associate = function(models) {
-    User.hasMany(models.Comment);
-    User.hasMany(models.Rating);
-  };
-  return User;
+		}
+	}, {});
+	User.associate = function(models) {
+		User.hasMany(models.Comment);
+		User.hasMany(models.Rating);
+	};
+	return User;
 };

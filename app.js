@@ -8,7 +8,15 @@ app.use(body.urlencoded({extended:true}));
 app.use(body.json());
 app.set("view engine", "ejs");
 app.use(express.static("public"));
-app.use(cookieParser());
 app.listen(3000);
+
+
+app.use(session({
+	secret:"its a secret!",
+	resave: false,
+	saveUninitialized: true
+}));
+
+
 
 app.use("/", routes);

@@ -15,12 +15,24 @@ class UserRequestController{
 			req.body.username,
 			req.body.password
 		)
-		.then((response)=>{
-			res.send(response);
+		.then((user)=>{
+			//res.send(response);
+			if(user){
+				req.session.user = user.dataValues;
+				res.redirect("/dashboard");
+			}
+			else{
+				res.send('id atau password salah')
+			}
 		})
 		.catch((err)=>{
 			res.send(err);
 		})
+	}
+
+	static logoutAuth_get(req,res){
+		req.session.user=null;
+		res.redirect("/");
 	}
 
 	static registerAuth_get(req,res){

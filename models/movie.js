@@ -14,15 +14,14 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     description: DataTypes.STRING,
-    genre: {
-      DataTypes.STRING},
+    genre: DataTypes.STRING,
     rating:{
       type:DataTypes.REAL,
       validate:{
         max: 5,
         min: 1
-        }
-      },
+      }
+    },
     pictureDir: DataTypes.STRING
   }, {});
 
