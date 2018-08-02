@@ -2,9 +2,9 @@ const routes = require("express").Router();
 const UserRequestController = require("../controllers/request/userController.js");
 
 //redirect to all comment
-routes.get("/", function()req,res){
+routes.get("/", function(req,res){
 	res.redirect("/login")
-}
+})
 
 //delete comment
 routes.get("/login",UserRequestController.loginAuth_get)
