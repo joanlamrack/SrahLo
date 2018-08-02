@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     pictureDir: DataTypes.STRING
   }, {});
+
   Movie.associate = function(models) {
     Movie.hasMany(models.Rating);
     Movie.hasMany(models.Comment);
