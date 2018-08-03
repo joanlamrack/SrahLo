@@ -9,7 +9,7 @@ const ratingHelper = require("./helpers/ratinghelper.js");
 app.use(function(req,res,next){
 	res.locals.ratingHelper= ratingHelper;
 	next();
-})
+});
 
 app.use(body.urlencoded({extended:true}));
 app.use(body.json());
@@ -28,3 +28,7 @@ app.use(session({
 
 
 app.use("/", routes);
+
+app.get("*", function(req, res){
+	res.render("error",{err:"page not found", cssadditional:[], title:"error"});
+});

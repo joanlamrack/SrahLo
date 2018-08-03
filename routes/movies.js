@@ -7,7 +7,8 @@ routes.get("/", function(req,res){
 });
 
 //delete comment
-routes.get("/all",MovieRequestController.viewAll_get );
+routes.get("/all",MiddlewareRoutes.sessioncheckerinverted,
+MovieRequestController.viewAll_get );
 
 routes.get("/:movieId",
 	MiddlewareRoutes.sessioncheckerinverted,

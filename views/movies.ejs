@@ -14,7 +14,7 @@ All Movies
 		<td><a href="<%=m.id%>"><%=m.title%></a></td>
 		<td><%=m.year%></td>
 		<td><%=m.genre%></td>
-		<td><%=m.rating%></td>
+		<td><%=ratingHelper.ratingExistOrNot(m.rating)%></td>
 	</tr>
 
   <% }); %>
