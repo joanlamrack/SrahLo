@@ -2,7 +2,6 @@ const UserController = require("../object/userController.js");
 
 class UserRequestController{
 	constructor(){
-
 	}
 
 	static loginAuth_get(req,res){
@@ -16,11 +15,8 @@ class UserRequestController{
 				req.body.password
 			)
 			.then((user)=>{
-			//res.send(response);
 				if(user){
-					
 					req.session.user = user.dataValues;
-					console.log(req.session.user);
 					res.redirect("/dashboard");
 				}
 				else{
@@ -28,12 +24,11 @@ class UserRequestController{
 				}
 			})
 			.catch((err)=>{
-				res.send(err);
+				res.render("error",{err, cssadditional:[],title:"Error"});
 			});
 	}
 
 	static logoutAuth_get(req,res){
-		console.log(req.session.user);
 		req.session.user=null;
 		res.redirect("/");
 	}
@@ -43,17 +38,16 @@ class UserRequestController{
 	}
 
 	static registerAuth_post(req,res){
-		console.log(req.body.username,req.body.password);
 		UserController
 			.add(
 				req.body.username, 
 				req.body.password
 			)
 			.then((response)=>{
-				res.redirect("/")
+				res.redirect("/");
 			})
 			.catch((err)=>{
-				res.send(err);
+				res.render("error",{err, cssadditional:[],title:"Error"});
 			});
 	}
 

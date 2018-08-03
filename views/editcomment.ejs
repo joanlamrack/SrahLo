@@ -1,0 +1,16 @@
+<%- include("head"); -%>
+<%- include("navbar"); -%>
+
+<form class="modal-content animate" id="commentContent" action="" method="POST">
+
+		<div class="container">
+		  <label for="uname"><b>Your Comment:</b></label><br>
+		  <textarea name="commentContent"><%=commentContent%></textarea> 
+		  <button type="submit">Post</button>
+		</div>
+  
+		<div class="container">
+		  <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+		</div>
+	  </form>
+<%- include("bottom"); -%>

@@ -2,6 +2,7 @@ const Model = require("../../models");
 const Movie = Model.Movie;
 const User = Model.User;
 const Comment = Model.Comment;
+const Rating = Model.Rating;
 
 class MovieController{
 	constructor(){
@@ -15,7 +16,7 @@ class MovieController{
 			genre,
 			description,
 			pictureDir
-		})
+		});
 	}
 
 	static delete(MovieId){
@@ -23,7 +24,7 @@ class MovieController{
 			where:{
 				id:MovieId
 			}
-		})
+		});
 	}
 
 	static update(title,year,genre,description,MovieId){
@@ -46,16 +47,21 @@ class MovieController{
 	static findAll(){
 		return Movie.findAll({
 			include:[Comment, Rating]
-		})
+		});
 	}
 
 	static findById(MovieId){
 		return Movie.findOne({
-			include:[Comment,User, Rating],
+			include:[
+				{
+					model: Comment,
+					include:[User]
+				}
+				, Rating],
 			where:{
 				id: MovieId
 			}
-		})
+		});
 	}
 
 	

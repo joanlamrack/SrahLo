@@ -1,0 +1,24 @@
+<%- include("head"); -%>
+<%- include("navbar"); -%>
+
+
+<% if(commentsFromUser.length) {%>
+	<% commentsFromUser.forEach(c=>{ %>
+		<div class="card card-block bg-faded">
+	    <h6>Your comment on <%=c.Movie.dataValues.title%></h6>
+	    <span class="comment_date">Date:<%=ratingHelper.dateFormatter(c.updatedAt)%></span>
+		<p><%=c.commentContent%></p>
+		<a href="<%=userId%>/comments/<%=c.id%>/edit">
+			edit
+		</a>
+		<a href="<%=userId%>/comments/<%=c.id%>/delete">
+			Delete
+		</a>
+		</div>
+		
+	<% }) %>
+<% } else { %>
+	No Comments Yet
+<% } %>
+
+<%- include("bottom"); -%>

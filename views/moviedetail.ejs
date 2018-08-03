@@ -1,0 +1,94 @@
+<%- include("head"); -%>
+<%- include("navbar"); -%>
+<div class="card">
+	<img class="card-img-top" src="<%=movie.pictureDir%>" alt="<%=movie.title%>">
+	<div class="card-body">
+	  <h5 class="card-title"><%=movie.title%></h5>
+	  <h6 class="card-title">Rating: <%=ratingHelper.ratingExistOrNot(movie.rating)%></h6>
+	  <p class="card-text"><%=movie.description%></p>
+	  <a onclick="document.getElementById('id02').style.display='block'" class="btn btn-primary">Add Comment</a>
+
+	  <% if(!ratingHelper.isMovieAlreadyRatedByUser(movie.Ratings,userId)){ %>
+	  <a onclick="document.getElementById('id01').style.display='block'" class="btn btn-primary">Give Rating</a>
+	  <% } %>
+	</div>
+
+	<% if(comments.length){ %>
+	<% comments.forEach(c=>{ %>
+		<div class="card-body comment">
+				<span id="username"><%=c.dataValues.User.username%> says:</p>
+					<%=c.commentContent%>
+				
+				<%if(c.dataValues.User.id === userId){ %>
+				<a href="../comments/<%=c.id%>/edit">
+					edit
+				</a>
+				<a href="../comments/<%=c.id%>/delete">
+					delete
+				</a>
+				<% } %>
+		</div>
+	<% }) %>
+	<% } else { %>
+		No Comments Yet
+	<% } %>
+
+  <div id="id02" class="modal">
+    <!-- ACTION  ADA DI SINI-->
+     <form class="modal-content animate" id="commentContent" action="<%=movie.id%>/addComment" method="POST">
+
+      <div class="container">
+        <label for="uname"><b>Your Comment:</b></label><br>
+		<textarea name="commentContent"></textarea> 
+        <button type="submit">Post</button>
+      </div>
+
+      <div class="container">
+        <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+  // Get the modal
+  var modal = document.getElementById('id02');
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
+  </script>
+
+<div id="id01" class="modal">
+		<!-- ACTION  ADA DI SINI-->
+		 <form class="modal-content animate" id="commentContent" action="<%=movie.id%>/giverating" method="POST">
+	
+		  <div class="container">
+			<label for="uname"><b>Your Rating (1-5):</b></label><br>
+			<input type="range" min="1" max="5" value="3" class="slider" id="myRange" name="rating">
+			<button type="submit">Post</button>
+		  </div>
+	
+		  <div class="container">
+			<button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+		  </div>
+		</form>
+	  </div>
+	
+	  <script>
+	  // Get the modal
+	  var modal = document.getElementById('id01');
+	
+	  // When the user clicks anywhere outside of the modal, close it
+	  window.onclick = function(event) {
+		  if (event.target == modal) {
+			  modal.style.display = "none";
+		  }
+	  }
+	  </script>
+	
+</div>
+		
+<%- include("bottom"); -%>

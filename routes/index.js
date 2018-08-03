@@ -2,48 +2,29 @@ const routes = require("express").Router();
 const auths = require("./auths.js");
 const comments = require("./comments.js");
 const movies = require("./movies.js");
+const CommentRequestController = require("../controllers/request/commentRequestController.js");
+const MiddlewareRoutes = require("../middlewares/route.js");
 
 routes.use("/auths", auths);
 routes.use("/dashboard/:userId/comments", comments);
 routes.use("/dashboard/:userId/movies", movies);
 
-
-let sessionchecker = (req,res,next)=>{
-	if(req.session.user){
-		console.log(req.session.user);
-		res.redirect(`/dashboard/${req.session.user.id}`);
-	}else{
-		next();
-	}
-};
-
-routes.get("/", sessionchecker, function(req,res){
+routes.get("/", MiddlewareRoutes.sessionchecker, function(req,res){
 	res.render("index.ejs",{
 		title:"SrahLo : Movie rating platform",
-		cssadditional:"index"
+		cssadditional:["index"]
 	});
 });
 
+routes.get("/dashboard",
+	MiddlewareRoutes.sessionchecker,
+	function(req,res){
+		res.redirect("/");
+	});
 
-
-
-routes.get("/dashboard",sessionchecker,function(req,res){
-
-});
-
-routes.get("/dashboard/:userId", function(req,res){
-	res.send("ini dashboard");
-});
-
-
-
-
-
-
-
-
-//redirect to dashboard/:userId/ if logged in
-
+routes.get("/dashboard/:userId",
+	MiddlewareRoutes.sessioncheckerinverted,
+	CommentRequestController.viewAllComment_get);
 
 
 module.exports = routes;

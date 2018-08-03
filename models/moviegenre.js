@@ -5,8 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     GenreId: DataTypes.INTEGER
   }, {});
   MovieGenre.associate = function(models) {
-    MovieGenre.belongsTo(models.Movie);
-    MovieGenre.belongsTo(models.Genre);
+    //MovieGenre.belongsTo(models.Movie);
+    //MovieGenre.belongsTo(models.Genre);
   };
   return MovieGenre;
 };

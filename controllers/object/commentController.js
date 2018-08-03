@@ -54,6 +54,10 @@ class CommentController{
 		});
 	}
 
+	static findById(CommentId){
+		return Comment.findById(CommentId);
+	}
+
 
 }
 

@@ -1,25 +1,32 @@
 const routes = require("express").Router();
-const MovieRequestController = require("../controllers/request/movieRequestController.js")
+const MovieRequestController = require("../controllers/request/movieRequestController.js");
+const MiddlewareRoutes = require("../middlewares/route.js");
 //redirect to all comment
 routes.get("/", function(req,res){
 	res.redirect("/all");
 });
 
-
-//all Movies
-routes.get("/all", function(req,res){
-	res.redirect("/all");
-});
-
 //delete comment
-routes.get("/all",MovieRequestController );
+routes.get("/all",MovieRequestController.viewAll_get );
 
-routes.get("/:movieId", MovieRequestController.viewOne_get);
+routes.get("/:movieId",
+	MiddlewareRoutes.sessioncheckerinverted,
+	MovieRequestController.viewOne_get);
 
-routes.get("/:movieId/giverating",MovieRequestController.giveRating_get);
-routes.post("/:movieId/giverating",MovieRequestController.giveRating_post);
+routes.get("/:movieId/giverating",
+	MiddlewareRoutes.sessioncheckerinverted,
+	MovieRequestController.giveRating_get);
 
-routes.get("/:movieId/addComment",MovieRequestController.createComment_get);
-routes.post("/:movieId/addComment",MovieRequestController.createComment_post);
+routes.post("/:movieId/giverating",
+	MiddlewareRoutes.sessioncheckerinverted,
+	MovieRequestController.giveRating_post);
+
+routes.get("/:movieId/addComment",
+	MiddlewareRoutes.sessioncheckerinverted,
+	MovieRequestController.createComment_get);
+
+routes.post("/:movieId/addComment",
+	MiddlewareRoutes.sessioncheckerinverted,
+	MovieRequestController.createComment_post);
 
 module.exports = routes;

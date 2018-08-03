@@ -1,0 +1,24 @@
+<%- include("head"); -%>
+<%- include("navbarmovie"); -%>
+
+All Movies
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Year</th>
+	<th>Genre</th>
+	<th>Rating</th>
+  </tr>
+  <% movies.forEach(m=>{ %>
+	<tr>
+		<td><a href="<%=m.id%>"><%=m.title%></a></td>
+		<td><%=m.year%></td>
+		<td><%=m.genre%></td>
+		<td><%=m.rating%></td>
+	</tr>
+
+  <% }); %>
+  
+</table>
+
+<%- include("bottom"); -%>

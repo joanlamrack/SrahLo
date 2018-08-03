@@ -12,8 +12,9 @@ class RatingController{
 		return Rating.create({
 			MovieId,
 			UserId,
-			rating
-		})
+			rating,
+			ratingDate:new Date
+		});
 	}
 
 	static getJHowManyRatingCountFromMovieId(MovieId){
